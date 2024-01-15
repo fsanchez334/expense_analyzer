@@ -37,20 +37,3 @@ def interest_rate(list_of_cards, interest_rates):
     #Sort the list
     credit_card_info.sort(key= lambda a: a[1], reverse=True)
     return credit_card_info
-        
-        
-chase_unlimited = ('Chase Freedom Unlimited' , 500, 3600)
-chase_sapphire = ('Chase Sapphire', 470, 16000)
-amex = ('Amex', 290, 5500)
-best_buy = ('Best Buy', 0, 3000)
-
-interest_rates = {
-    'Chase Freedom Unlimited': 0.2024,
-    'Chase Sapphire': 0.2349,
-    'Amex': 0.00,
-    'Best Buy': 0.2
-}
-cards = [chase_unlimited, chase_sapphire, amex, best_buy]
-print(credit_utilization(cards))
-#Sorted list of credit cads to pay
-print(interest_rate(cards, interest_rates))
