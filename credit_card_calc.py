@@ -1,6 +1,12 @@
-#Credit card calculator
-#First, get the total credit card
 
+
+def fifty_thirty_rule(take_home_pay):
+    fifty_percent = 0.5 * take_home_pay
+    thirty_percent = 0.3 * take_home_pay
+    twenty_percent = 0.2 * take_home_pay
+
+    return fifty_percent, thirty_percent, twenty_percent
+ 
 def credit_utilization(list_of_credit_cards):
     #Should calculate the credit utilization of the cards you have
     '''
