@@ -9,21 +9,3 @@ if __name__ == "__main__":
     pay = float(input("We will apply the 50-30-20 rule - please provide your check pay: "))
     tuplet_split = cc.fifty_thirty_rule(pay)
     print("50% is {}, 30 % is {}, and 20% is {}".format(tuplet_split[0], tuplet_split[1], tuplet_split[2]))
-    # credit_cards = []
-    # interest_rates = {}
-    # while True:
-    #     container = [x for x in input("Please provide name of bank, the balance you have on that card, the limit, and the APR: ").split(" ")]
-    #     if container[0] == '':
-    #         break
-    #     else:
-    #         for i in range(1, len(container)):
-    #             container[i] = float(container[i])
-    #         credit_card_tuple = tuple(container)
-    #         print(credit_card_tuple)
-    #         credit_cards.append(credit_card_tuple)
-    #         interest_rates[credit_card_tuple[0]] = credit_card_tuple[3]
-    
-    # print(interest_rates)
-    # print(cc.credit_utiliza
-    # tion(credit_cards))
-    # print(cc.calculate_accrued_interest())
