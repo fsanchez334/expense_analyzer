@@ -1,20 +1,36 @@
+import pandas as pd 
 
-def fifty_thirty_rule(take_home_pay):
-    fifty_percent = 0.5 * take_home_pay
-    thirty_percent = 0.3 * take_home_pay
-    twenty_percent = 0.2 * take_home_pay
+class ExpenseAnalyzer:
+    def __init__(self, paycheck_amount, expenses_file):
+        self.needs = paycheck_amount * 0.5
+        self.wants = paycheck_amount * 0.2
+        self.savings = paycheck_amount * 0.3
+        self.expenses = pd.read_csv(expenses_file)
 
-    return (fifty_percent, thirty_percent, twenty_percent)
- 
-def credit_utilization(list_of_credit_cards):
-    #Should calculate the credit utilization of the cards you have
-    '''
-    @param list_of_credit_cards -> list of tuples of size 2
-    '''
-    total_limit = 0
-    total_used = 0 
-    for tuplet in list_of_credit_cards:
-        total_limit += tuplet[2]
-        total_used += tuplet[1]
-        print("For card {}, this is credit utilization: {}".format(tuplet[0], total_used/total_limit))
-    return total_used / total_limit
+    def getSavings(self):
+        return self.savings
+    
+    def getAmountforNeeds(self):
+        return self.needs
+
+    def getAmoutforWants(self):
+        return self.wants
+    
+    def modifySavingsAmount(self, amount):
+        self.savings += amount
+    
+    def modifyNeedsAmount(self, amount):
+        self.needs += amount
+    
+    def modifyWantsAmount(self, amount):
+        self.wants += amount
+
+    def expense_collection(self):
+        #Collect all the payments that must be made from the 50% amount
+        costs = self.expenses.get("Amount").tolist()
+        return sum(costs)
+    
+    def provideUserStatus(self):
+        print("To cover must-have costs, you have {}".format(self.needs))
+        print("The amount you can use for your savings is {}".format(self.savings))
+        print("The amount you can use for your wants is {}".format(self.wants))
