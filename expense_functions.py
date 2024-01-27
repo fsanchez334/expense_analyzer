@@ -33,7 +33,6 @@ class ExpenseAnalyzer:
         #Collect all the payments that must be made from the 50% amount
         costs = self.expenses.get("Amount").tolist()
         return sum(costs)
-    
     def provideUserStatus(self):
         print("*" * 90)
         print("You currently have {}".format(self.total_amount))
