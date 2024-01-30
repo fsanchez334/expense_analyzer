@@ -1,5 +1,8 @@
-Expense,Amount
-Car Loan Payment,645
-Insurance,300
-Tolls,450
-Credit Card Payment,200
+Expense,Amount,Credit Card?,Interest Rate,Total
+Car Loan Payment,645,N,0,645
+Insurance,300,N,0,300
+Tolls,450,N,0,450
+Amex Blue Cash Preferred,299,Y,20,12500
+Amex Gold Card,1121,Y,29,15000
+Chase Freedom Unlimited,289,Y,20.24,3600
+Chase Sapphire Preferred ,2970,Y,23.49,23200
