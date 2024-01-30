@@ -1,4 +1,5 @@
 import pandas as pd 
+from IPython.display import display
 
 class ExpenseAnalyzer:
     def __init__(self, paycheck_amount, expenses_file):
@@ -35,8 +36,28 @@ class ExpenseAnalyzer:
         return sum(costs)
     def provideUserStatus(self):
         print("*" * 90)
-        print("You currently have {}".format(self.total_amount))
+        print("You currently have {}. This assumes you want to pay off all of your credit card debt".format(self.total_amount))
         print("To cover must-have costs, you have {}".format(self.needs))
         print("The amount you can use for your savings is {}".format(self.savings))
         print("The amount you can use for your wants is {}".format(self.wants))
         print("*" * 90)
+
+    def credit_card_utilization(self):
+        #Get Credit Card dataframes
+        credit_boolean = self.expenses["Credit Card?"] == "Y"
+        df_credit_card = self.expenses[credit_boolean]
+        total_credit_allowed = sum(df_credit_card.get("Total").tolist())
+        total_credit_used = sum(df_credit_card.get("Amount").tolist())
+        return float(total_credit_used/ total_credit_allowed)
+    
+    
+    def credit_card_breakdown(self):
+        #Here, we return the breakdown of each credit card, including amount used, total and interest rate
+        credit_boolean = self.expenses["Credit Card?"] == "Y"
+        df_credit_card = self.expenses[credit_boolean]
+        col = df_credit_card.apply(lambda row: float(row.Amount / row.Total), axis=1)
+        df_credit_card = df_credit_card.assign(percent_used=col.values)
+        columns = ["Expense", "Amount", "Total", "Interest Rate", "percent_used"]
+        display(df_credit_card[columns])
+
+        
