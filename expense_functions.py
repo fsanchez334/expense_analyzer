@@ -1,5 +1,8 @@
 from IPython.display import display
 import pandas as pd
+from sklearn.preprocessing import MinMaxScaler
+import heapq as hq
+
 class ExpenseAnalyzer:
     def __init__(self, paycheck_amount, expenses_file):
         self.total_amount = paycheck_amount
@@ -63,8 +66,22 @@ class ExpenseAnalyzer:
         df_credit_card = df_credit_card[columns]
         return df_credit_card
 
-    # def credit_heap(self, df):
-    #     #Here, we will take in the credit df and only get the CC, the amount, interest_rate, percent_used
-    #     focused_columns = ["Expense", "Amount", "Interest Rate", "percent_used"]
+    def credit_heap(self, df):
+        #Here, we will take in the credit df and only get the CC, the amount, interest_rate, percent_used
+        focused_columns = ["Expense", "approximateInterest", "percent_used"]
+        df_starter = df[focused_columns]
+        #We will need to scale the interest and the percent used
+        scaler = MinMaxScaler()
+        df_starter[["approximateInterest", "percent_used"]] = scaler.fit_transform(df_starter[["approximateInterest", "percent_used"]])
+        #Now that we have constructed this - we are ready construct our Priority Heap (we can use the average of the scaled percentages)
+        credit_cards = df_starter["Expense"].tolist()
+        summation = ((df_starter["approximateInterest"] +  df_starter["percent_used"]) / 2).tolist()
+        heap = []
+        for i in range(len(credit_cards)):
+            heap.append((summation[i] * -1, credit_cards[i]))
+        hq.heapify(heap)
+        while len(heap) != 0:
+            print(hq.heappop(heap))
+            
         
         
