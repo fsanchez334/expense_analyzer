@@ -1,5 +1,5 @@
 from expense_functions import ExpenseAnalyzer
-import pandas as pd
+from IPython.display import display
 
 if __name__ == "__main__":
     
@@ -23,7 +23,9 @@ if __name__ == "__main__":
     print("Your expected expenses total: {}".format(expected_expenses))
     credit_utilization = EA.credit_card_utilization()
     print("Your credit utilization is {}".format(credit_utilization))
-    EA.credit_card_breakdown()
+    credit_df = EA.credit_card_breakdown()
+    display(credit_df)
+    credit_heap = EA.construct_heap(credit_df)
     proceed_ = 1
     if expected_expenses > pay:
         print("You will not have enough to cover your expeneses")
