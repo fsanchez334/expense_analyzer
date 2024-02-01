@@ -1,6 +1,5 @@
-import pandas as pd 
 from IPython.display import display
-
+import pandas as pd
 class ExpenseAnalyzer:
     def __init__(self, paycheck_amount, expenses_file):
         self.total_amount = paycheck_amount
@@ -56,8 +55,16 @@ class ExpenseAnalyzer:
         credit_boolean = self.expenses["Credit Card?"] == "Y"
         df_credit_card = self.expenses[credit_boolean]
         col = df_credit_card.apply(lambda row: float(row.Amount / row.Total), axis=1)
-        df_credit_card = df_credit_card.assign(percent_used=col.values)
-        columns = ["Expense", "Amount", "Total", "Interest Rate", "percent_used"]
-        display(df_credit_card[columns])
+        interest_column = df_credit_card.apply(lambda row: ((row["Interest Rate"] / 12) / 100) * row['Amount'], axis=1)
 
+        df_credit_card = df_credit_card.assign(percent_used=col.values)
+        df_credit_card = df_credit_card.assign(approximateInterest=interest_column)
+        columns = ["Expense", "Amount", "Total", "Interest Rate", "approximateInterest", "percent_used"]
+        df_credit_card = df_credit_card[columns]
+        return df_credit_card
+
+    # def credit_heap(self, df):
+    #     #Here, we will take in the credit df and only get the CC, the amount, interest_rate, percent_used
+    #     focused_columns = ["Expense", "Amount", "Interest Rate", "percent_used"]
+        
         
