@@ -25,7 +25,8 @@ if __name__ == "__main__":
     print("Your credit utilization is {}".format(credit_utilization))
     credit_df = EA.credit_card_breakdown()
     display(credit_df)
-    credit_heap = EA.construct_heap(credit_df)
+    print("Based on your input, these are the credit cards, in order of priority that you should pay")
+    EA.credit_heap(credit_df)
     proceed_ = 1
     if expected_expenses > pay:
         print("You will not have enough to cover your expeneses")
