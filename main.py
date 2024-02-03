@@ -1,5 +1,7 @@
 from expense_functions import ExpenseAnalyzer
+from credit_analyzer import CreditAnalyzer
 from IPython.display import display
+import pandas as pd
 
 if __name__ == "__main__":
     
@@ -16,8 +18,14 @@ if __name__ == "__main__":
     print("=" * 90)
     pay = float(input("Please provide your check pay: "))
 
-    EA = ExpenseAnalyzer(pay, "sample_expenses.csv")
+    main_df = pd.read_csv("sample_expenses.csv")
+    credit_boolean = main_df["Credit Card?"] == "Y"
+    credit_df = main_df[credit_boolean]
+
+    EA = ExpenseAnalyzer(pay, main_df)
+    CA = CreditAnalyzer(credit_df)
     EA.provideUserStatus()
+
     amount_available_for_expenses = EA.getAmountforNeeds()
     expected_expenses = EA.expense_collection()
     print("Your expected expenses total: {}".format(expected_expenses))
