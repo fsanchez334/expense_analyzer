@@ -29,12 +29,29 @@ if __name__ == "__main__":
     amount_available_for_expenses = EA.getAmountforNeeds()
     expected_expenses = EA.expense_collection()
     print("Your expected expenses total: {}".format(expected_expenses))
-    credit_utilization = EA.credit_card_utilization()
-    print("Your credit utilization is {}".format(credit_utilization))
-    credit_df = EA.credit_card_breakdown()
+    CA.calculate_credit_card_utilization()
+    credit_used = CA.getCreditUtilization()
+
+    print("Your credit utilization is {}".format(credit_used))
+    credit_df = CA.credit_card_breakdown()
+    credit_dict = CA.constructCreditDict(credit_df)
+
     display(credit_df)
     print("Based on your input, these are the credit cards, in order of priority that you should pay")
-    EA.credit_heap(credit_df)
+    print(credit_dict.keys())
+    CA.credit_heap(credit_df, credit_dict)
+    print("However, you have the option to choose a card and provide the desired percent utilization for that card - we can then calculate how much you need to pay to reach that desired goal")
+    manage_credit_response = input("Would you like to try it? Yes/No: ")
+    manage_boolean = False
+    if manage_credit_response == "Yes":
+        manage_boolean = True
+    while manage_boolean:
+        credit_card_name = input("What credit card would you like to analyze? ")
+        desired_utilization = float(input("What's your desired utilization? Please input in decimal form (ex. 0.13 for 15%): "))
+        CA.calculateOptimalPayment(credit_dict, credit_card_name, desired_utilization)
+        more_ = input("Would you like to change another card? Yes/No: ")
+        if more_ != "Yes":
+            manage_boolean = False
     proceed_ = 1
     if expected_expenses > pay:
         print("You will not have enough to cover your expeneses")
