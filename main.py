@@ -1,4 +1,4 @@
-from expense_functions import ExpenseAnalyzer
+from expense_functions import *
 from credit_analyzer import CreditAnalyzer
 from IPython.display import display
 import pandas as pd
@@ -6,22 +6,12 @@ import pandas as pd
 if __name__ == "__main__":
     
     
-
-    print("="*90)
-    print("Expense Analyzer")
-    print("=" * 90)
-    print("The 50-30-20 rule")
-    print("=" * 90)
-
-    print("We will compile your provided expenses and provide a report in return using the 50-30-20 rule")
-    print("The idea is to divide your income into three categories, spending 50% on needs, 30% on wants, and 20% on savings")
-    print("=" * 90)
-    pay = float(input("Please provide your check pay: "))
-
+    formatIntro()
     main_df = pd.read_csv("sample_expenses.csv")
+
     credit_boolean = main_df["Credit Card?"] == "Y"
     credit_df = main_df[credit_boolean]
-
+    pay = float(input("Please provide your check pay: "))
     EA = ExpenseAnalyzer(pay, main_df)
     CA = CreditAnalyzer(credit_df)
     EA.provideUserStatus()

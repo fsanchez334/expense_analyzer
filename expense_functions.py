@@ -6,6 +6,8 @@ class ExpenseAnalyzer:
         self.savings = paycheck_amount * 0.2
         self.expenses = df
 
+
+
     def getSavings(self):
         return self.savings
     
@@ -33,11 +35,17 @@ class ExpenseAnalyzer:
         return sum(costs)
     def provideUserStatus(self):
         print("*" * 90)
-        print("You currently have {}. This assumes you want to pay off all of your credit card debt".format(self.total_amount))
+        print("You currently have {}".format(self.total_amount))
         print("To cover must-have costs, you have {}".format(self.needs))
         print("The amount you can use for your savings is {}".format(self.savings))
         print("The amount you can use for your wants is {}".format(self.wants))
         print("*" * 90)
+
+def formatIntro():
+    intro_string = "Expense Analyzer: Compiles provided expenses and provides a report using the 50-30-20 rule"
+    print("=" * len(intro_string))
+    print(intro_string)
+    print("="* len(intro_string))
 
  
         
