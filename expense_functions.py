@@ -31,15 +31,26 @@ class ExpenseAnalyzer:
 
     def expense_collection(self):
         #Collect all the payments that must be made from the 50% amount
-        costs = self.expenses.get("Amount").tolist()
+        #Update - we should remove the credit_card expenses - those will be seperate
+        no_credit_boolean = self.expenses["Credit Card?"] == "N"
+        costs = self.expenses[no_credit_boolean].get("Amount").tolist()
         return sum(costs)
-    def provideUserStatus(self):
-        print("*" * 90)
+    def provideUserStatusRule(self):
+        title = "Applying the 50-30-20 rule"
+        adornments = "*" * 100
+        print(adornments.center(100))
+        print(title.center(100))
         print("You currently have {}".format(self.total_amount))
         print("To cover must-have costs, you have {}".format(self.needs))
         print("The amount you can use for your savings is {}".format(self.savings))
         print("The amount you can use for your wants is {}".format(self.wants))
-        print("*" * 90)
+
+    def coveringExpensesBlurb(self, expected_expenses):
+        title = "Covering Expenses"
+        adornments = "*" * 100
+        print(adornments.center(100))
+        print(title.center(100))
+        print("Your expected expenses total (without credit card debt): {}".format(expected_expenses))
 
 def formatIntro():
     intro_string = "Expense Analyzer: Compiles provided expenses and provides a report using the 50-30-20 rule"
