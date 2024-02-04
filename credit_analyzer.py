@@ -16,7 +16,7 @@ class CreditAnalyzer:
         total_credit_allowed = sum(self.credit_card_df.get("Total").tolist())
         total_credit_used = sum(self.credit_card_df.get("Amount").tolist())
         self.credit_used = float(total_credit_used/ total_credit_allowed)
-
+        return total_credit_used
     
     def credit_card_breakdown(self):
         #Here, we return the breakdown of each credit card, including amount used, total and interest rate
@@ -31,6 +31,7 @@ class CreditAnalyzer:
     
     def constructCreditDict(self, df):
         container = df.copy()
+        container["Expense"] = container["Expense"].apply(lambda x: x.strip())
         container.set_index("Expense", drop=True, inplace=True)
         credit_dict = container.to_dict(orient="index")
         return credit_dict
@@ -52,13 +53,12 @@ class CreditAnalyzer:
         while len(heap) != 0:
             credit_tuplet = hq.heappop(heap)
             credit_card_name = credit_tuplet[1]
-            #Get the percentage
-            if credit_dict[credit_card_name]['percent_used'] > 0.1:
-                self.calculateOptimalPayment(credit_dict, credit_card_name, 0.1)
+            print(credit_card_name)
                 
             
     def calculateOptimalPayment(self, credit_dict, card_name, goal_utilization):
         #We need the amount, total
         goal_amount = credit_dict[card_name]['Total'] * goal_utilization
         need_to_pay = credit_dict[card_name]['Amount'] - goal_amount
-        print("In order for the card {} to be {}% utilized, you'd need to pay {}".format(card_name, goal_utilization, need_to_pay)) 
+        message_= "In order for the card {} to be {}% utilized, you'd need to pay {}".format(card_name, goal_utilization, need_to_pay)
+        return message_, need_to_pay
