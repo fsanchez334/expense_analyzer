@@ -1,8 +1,9 @@
 Expense,Amount,Credit Card?,Interest Rate,Total
-Car Loan Payment,645,N,0,645
-Insurance,300,N,0,300
-Tolls,450,N,0,450
-Amex Blue Cash Preferred,299,Y,20,12500
-Amex Gold Card,1121,Y,29,15000
-Chase Freedom Unlimited,289,Y,20.24,3600
-Chase Sapphire Preferred ,2970,Y,23.49,23200
+Car Loan Payment,645.51,N,0,645
+Rent ,450,N,0,450
+Insurance,642.98,N,0,642.98
+Tolls,345,N,0,345
+Amex Blue Cash Preferred,570.19,Y,20,12500
+Amex Gold Card,1121.03,Y,29,15000
+Chase Freedom Unlimited,376.39,Y,20.24,3600
+Chase Sapphire Preferred ,3267.98,Y,23.49,23200
