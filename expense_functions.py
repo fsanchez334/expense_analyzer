@@ -58,6 +58,24 @@ def formatIntro():
     print(intro_string)
     print("="* len(intro_string))
 
+def subsidizeNeeds(expected_expenses, EA):
+    #Calculate how much is needed 
+    amount_needed = expected_expenses - EA.getAmountforNeeds()
+    print("Your 50% category is not enough to cover - you need at least {} to be able to cover your expenses".format(amount_needed))
+    print("Let's move money from the other categories")
+    category = input("From which category would you like to move money from? Savings or Wants: ")
+    if category == "Savings":
+        savings = EA.getSavings()
+        transfer_amount = float(input("This is how much you have in savings {} - how much of that would you like to use for your needs? ".format(savings)))
+        EA.updateSavings(-1 * transfer_amount)
+        EA.updateNeeds(transfer_amount)
+        EA.provideUserStatusRule()
+    else:
+        wants = EA.getAmoutforWants()
+        transfer_amount = float(input("This is how much you have for your wants {} - how much of that would you like to use for your needs? ".format(wants)))
+        EA.updateWants(-1 * transfer_amount)
+        EA.updateNeeds(transfer_amount)
+        EA.provideUserStatusRule()
  
         
         
