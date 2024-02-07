@@ -62,3 +62,8 @@ class CreditAnalyzer:
         need_to_pay = credit_dict[card_name]['Amount'] - goal_amount
         message_= "In order for the card {} to be {}% utilized, you'd need to pay {}".format(card_name, goal_utilization, need_to_pay)
         return message_, need_to_pay
+    
+    def calcualteMinimumPaymentTotal(self):
+        #Gather the total mininum payment on the credit cards
+        holder =  self.credit_card_df["Minimum_Payment"]
+        return sum(holder.tolist())
