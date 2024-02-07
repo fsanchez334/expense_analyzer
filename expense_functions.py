@@ -17,8 +17,17 @@ class ExpenseAnalyzer:
     def getAmoutforWants(self):
         return self.wants
     
-    def updateTotal(self, amount):
+    def increaseTotal(self, amount):
         self.total_amount += amount
+        self.needs = self.total_amount * 0.5
+        self.wants = self.total_amount * 0.3
+        self.savings = self.total_amount * 0.2
+
+    def decreaseTotal(self, amount):
+        self.total_amount -= amount
+        self.needs = self.total_amount * 0.5
+        self.wants = self.total_amount * 0.3
+        self.savings = self.total_amount * 0.2
     
     def updateSavings(self, amount):
         self.savings += amount
