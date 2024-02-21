@@ -25,9 +25,6 @@ class ExpenseAnalyzer:
 
     def decreaseTotal(self, amount):
         self.total_amount -= amount
-        self.needs = self.total_amount * 0.5
-        self.wants = self.total_amount * 0.3
-        self.savings = self.total_amount * 0.2
     
     def updateSavings(self, amount):
         self.savings += amount
@@ -37,6 +34,7 @@ class ExpenseAnalyzer:
     
     def updateWants(self, amount):
         self.wants += amount
+
 
     def expense_collection(self):
         #Collect all the payments that must be made from the 50% amount
@@ -85,6 +83,7 @@ def subsidizeNeeds(expected_expenses, EA):
         EA.updateWants(-1 * transfer_amount)
         EA.updateNeeds(transfer_amount)
         EA.provideUserStatusRule()
+
  
         
         
