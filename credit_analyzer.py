@@ -26,7 +26,7 @@ class CreditAnalyzer:
 
         df_credit_card = self.credit_card_df.assign(percent_used=percent_column)
         df_credit_card = df_credit_card.assign(approximateInterest=interest_column)
-        columns = ["Expense", "Amount", "Total", "Interest Rate", "approximateInterest", "percent_used", "Date Due"]
+        columns = ["Expense", "Amount", "Total", "Interest Rate", "approximateInterest", "percent_used", "Minimum_Payment", "Date Due"]
         df_credit_card = df_credit_card[columns]
         return df_credit_card
     
