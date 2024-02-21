@@ -26,6 +26,7 @@ if __name__ == "__main__":
             print("You can cover your expenses using money in your 50% category")
             print("That would result in the following")
             EA.decreaseTotal(expected_expenses)
+            EA.updateNeeds(-1 * expected_expenses)
             EA.provideUserStatusRule()
             break
         else:
@@ -42,16 +43,15 @@ if __name__ == "__main__":
     #Here, we want to check if the must-have is enough to cover credit_card_debt (the minimum)
     remaining_need = EA.getAmountforNeeds()
     total_minimum = CA.calcualteMinimumPaymentTotal()
+    print("Your credit utilization is {}".format(credit_used_percent))
+    display(credit_df)
     print("If you make the minimum payment on your credit card(s), you'll have to pay: {}".format(total_minimum))
-    if remaining_need < total_minimum:
+    while remaining_need < total_minimum:
         print("Sorry, with the remaining amount, you won't have enough to cover the mininum credit card debt")
         subsidizeNeeds(total_minimum, EA)
-    
+        remaining_need = EA.getAmountforNeeds()
 
-    print("Your credit utilization is {}".format(credit_used_percent))
-    
 
-    display(credit_df)
     print("Based on your input, these are the credit cards, in order of priority that you should pay")
     CA.credit_heap(credit_df, credit_dict)
     print("You have the option to choose a card and provide the desired percent utilization for that card - we can then calculate how much you need to pay to reach that desired goal")
