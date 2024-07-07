@@ -75,3 +75,5 @@ class CreditAnalyzer:
         #Gather the total mininum payment on the credit cards
         holder =  self.credit_card_df["Minimum_Payment"]
         return sum(holder.tolist())
+
+        #Testing a new environment
